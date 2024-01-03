@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UAS PWA ALAN</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Tambahkan script Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js"></script>
+<script>
+  // Konfigurasi Firebase Anda
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZ_LKhAW0siEecyFgtGxdzHbt9BTWUzTk",
+    authDomain: "uaspwa-alan.firebaseapp.com",
+    projectId: "uaspwa-alan",
+    storageBucket: "uaspwa-alan.appspot.com",
+    messagingSenderId: "597331997793",
+    appId: "1:597331997793:web:081adc0f929477a3fa6620",
+    measurementId: "G-9T1C7K3SVT"
+  };
+  // Inisialisasi Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+
+  // Dapatkan objek messaging Firebase
+  const messaging = firebase.messaging();
+
+  // Add the following lines of code to request permission for receiving notifications
+  messaging.requestPermission().then(() => {
+    console.log('Notification permission granted.');
+    return messaging.getToken();
+  }).then((token) => {
+    console.log('FCM Token:', token);
+    // Kirim token ke server Anda atau lakukan apa yang diperlukan
+  }).catch((err) => {
+    console.log('Unable to get permission to notify.', err);
+  });
+</script>
+
+
+</head>
+<body>
+
+ <header>
+  <nav>
+    <a class="nav-link" href="#" onclick="scrollToPage(1)">HOME</a>
+    <a class="nav-link" href="#" onclick="scrollToPage(2)">FORM INPUT DATA</a>
+    <a class="nav-link" href="#" onclick="scrollToPage(3)">PROFIL</a>
+  </nav>
+</header>
+
+    <div class="wrapper">
+  <div class="app-shell">
+    <div class="page-container">
+
+      <!-- Halaman 1 -->
+      <div class="page" id="page1">
+        
+        <h1>Selamat Datang ini PWA saya</h1>
+        <button id="pushTokenButton">Ambil Token</button>
+        <div id="tokenDisplay"></div>
+      </div>
+  
+      <!-- Halaman 2 -->
+      <div class="page" id="page2">
+       
+        <div class="app-shell">
+          <h1>Form Input Data</h1>
+      
+          <!-- Form Input Mahasiswa -->
+          <form id="mahasiswaForm">
+            <div class="input-box">
+              <label for="nama">Nama:</label>
+              <input type="text" id="nama" name="nama" required>
+            </div>
+      
+            <div class="input-box">
+              <label for="nim">NIM:</label>
+              <input type="text" id="nim" name="nim" required>
+            </div>
+      
+          
+            <div class="input-box">
+              <label for="kelas">Kelas:</label>
+              <select id="kelas" name="kelas" required>
+                <option value="reguler_pagi">Reguler Pagi</option>
+                <option value="reguler_malam">Reguler Malam</option>
+              </select>
+            </div>
+      
+            <div class="input-box">
+              <label for="semester">Semester:</label>
+              <input type="text" id="semester" name="semester" required>
+            </div>
+      
+           
+            <div class="input-box">
+              <label for="jurusan">Jurusan:</label>
+              <select id="jurusan" name="jurusan" required>
+                <option value="Teknik Informatika">Teknik Informatika</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+              </select>
+            </div>
+      
+            <div class="input-box">
+              <label for="alasan">Alasan Belajar PWA:</label>
+              <textarea id="alasan" name="alasan" rows="4" required></textarea>
+            </div>
+      
+            <button type="button" onclick="addMahasiswa()">Input Data</button>
+          </form>
+      
+          <!-- Tabel untuk Menampilkan Data Mahasiswa -->
+          <h2>Data Mahasiswa</h2>
+          <table id="mahasiswaTable">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>NIM</th>
+                <th>Kelas</th>
+                <th>Semester</th>
+                <th>Jurusan</th>
+                <th>Alasan Belajar PWA</th>
+              </tr>
+            </thead>
+            <tbody id="mahasiswaTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+  
+      <!-- Halaman 3 -->
+      <div class="page" id="page3">
+        
+        <div class="app-shell">
+    
+   
+          <div class="containercv">
+            <h1>PROFIL</h1>
+            <div class="profilecv">
+            <img src="foto-diri.png" alt="Foto Diri">
+        </div>
+        <p style="font-size: 1.2em; font-weight: bold;">Nama <br>Alan Eka Prayoga</p>
+        <p style="font-size: 1.2em; font-weight: bold;">NIM<br> 20185006</p>
+        <p style="font-size: 1.2em; font-weight: bold;">Kelas<br> Reguler Malam</p>
+        <p style="font-size: 1.2em; font-weight: bold;">Semester 7</p>
+        <p style="font-size: 1.2em; font-weight: bold;">Mata Kuliah<br> Mobile Programming</p>
+        <p style="font-size: 1.2em; font-weight: bold;">Tujuan Belajar Mobile Programming PWA</p>
+        <p style="text-align: justify;">
+            Memahami dan menguasai konsep-konsep pengembangan aplikasi web modern. PWA dirancang untuk memberikan pengalaman mirip aplikasi native melalui web browser tanpa perlu instalasi khusus. Dengan memahami PWA, pengembang dapat meningkatkan kinerja, responsivitas, dan kemampuan offline aplikasi web. Ini juga memungkinkan integrasi yang lebih baik di berbagai platform, menciptakan pengalaman pengguna seragam dan responsif. PWA memberikan kemampuan untuk membuat aplikasi web inovatif, efisien, dan sesuai dengan kebutuhan pengguna modern.
+        </p>
+        
+        </div>
+      </div>
+      </div>
+  
+    </div>
+  
+    
+  <script src="app.js"></script>
+  <script src="indexdb.js"></script>
+  <footer>
+    <p>&copy; 2024 Your PWA</p>
+  </footer>
+</div>
+</body>
+<!-- Tambahkan ini di bagian bawah HTML -->
+<script>
+  function scrollToPage(pageNumber) {
+    const pageElement = document.getElementById(`page${pageNumber}`);
+    if (pageElement) {
+      pageElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+</body>
+
+</html>
